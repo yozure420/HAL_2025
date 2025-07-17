@@ -44,3 +44,35 @@ user.class_method()
 # クラスメソッドは、
 # インスタンスに関係なく、
 # クラス自体の持ち物。
+
+
+
+class User:
+    def im(self):
+        print(1)
+        
+    @classmethod
+    def cm(cls):
+        print(100)
+        
+    def im2(self):
+        # インスタンスメソッド内から、
+        # インスタンスメソッドは呼べる
+        self.im()
+        print(2)
+        
+        
+        # クラスメソッドも呼べる
+        User.cm()
+        self.__class__.cm()  # これもOK
+
+    @classmethod
+    def cm2(cls):
+        print(200)
+        User.cm()
+        cls.cm()
+        # cls.im()  # これはエラー（クラスからインスタンスメソッドは呼べない）
+
+user = User()
+user.im2()
+User.cm2()
